@@ -20,7 +20,7 @@ practice and the confusion is expensive.
 
 | Finding | Evidence |
 |---|---|
-| Features are worth about **0.12 AUC** | LightFM WARP with features: **0.906**. Surprise SVD++ IDs-only: **0.784**. |
+| Features are worth about **0.14 AUC** | LightFM WARP with features: **0.9331**. Surprise SVD++ IDs-only: **0.7924**. |
 | Train-only aggregates **do not help** at matched capacity | Sahara with aggregates: 0.8700. Without: 0.8710. Delta is negative and costs 68 extra seconds. |
 | **WARP beats cross-entropy** on top-K ranking | LightFM WARP: 0.906 in 17s. Sahara YouTubeRanking: 0.871 in 776s. |
 | **Cython is 45× faster** than PyTorch on CPU | 17s vs 776s at comparable AUC. The gap is structural, not tunable. |
@@ -30,10 +30,10 @@ practice and the confusion is expensive.
 
 | Model | Framework | Features | Test AUC | Train (CPU) |
 |---|---|---|---|---|
-| **LightFM WARP** | Cython+OpenMP | content | **0.9059** | **17s** |
-| Sahara YouTubeRanking | PyTorch | content | 0.8710 | 776s |
-| Sahara YouTubeRanking | PyTorch | content + aggregates | 0.8700 | 843s |
-| Surprise SVD++ | Python/Cython | IDs only | 0.7840 | 162s |
+| **LightFM WARP** | Cython+OpenMP | content | **0.9331** | **18s** |
+| Sahara YouTubeRanking | PyTorch | content | 0.8715 | 576s |
+| Sahara YouTubeRanking | PyTorch | content + aggregates | 0.8725 | 606s |
+| Surprise SVD++ | Python/Cython | IDs only | 0.7840 | 261s |
 
 AUC is the only metric directly comparable across frameworks. P@10 and
 R@10 use different candidate pools: LightFM's single-positive protocol,
